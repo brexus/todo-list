@@ -73,6 +73,8 @@ export const ScreenController = (() => {
     const closeAddProjectWindow = () => {
         const addProjectWindow = document.getElementById("add-project-window");
         addProjectWindow.style.display = 'none';
+        const projectTitle = document.getElementById("project-title");
+        projectTitle.value = "";
     };
 
     const showAddProjectButton = () => {
@@ -123,7 +125,6 @@ export const ScreenController = (() => {
             showProjects();
             closeAddProjectWindow();
             showAddProjectButton();
-            projectTitle.value = "";
             addProjectWindow.classList.toggle('disable');
             addProjectWindow.classList.toggle('active');
         });
