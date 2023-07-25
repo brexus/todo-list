@@ -1,5 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+:root {
+    --light: #e2e8f0;
+    --light-darken: #bbbfc5;
+
+    --dark: rgb(46, 46, 46);
+    --dark-lighten: rgb(110, 110, 110);
+
+    --cream: #FFFDD0;
+    --gold: #d4a13b;
+    --gold-light: #e7e5e0;
+    
+    --header-height: 68px;
+    --footer-height: 35px;
+    --button-height: 40px;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+#content {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#header {
+    background-color: var(--dark);
+    color: white;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+#main-aside-container {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - var(--footer-height) - var(--header-height));
+}
+
+/* ============== ASIDE ==============  */
+#aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 300px;
+    background-color: var(--light);
+    padding: 20px;
+}
+
+#aside > h2 {
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+#aside > button {
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    padding-left: 10px;
+    background-color: var(--light);
+    cursor: pointer;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    height: var(--button-height);
+}
+
+#aside > button:hover {
+    background-color: var(--light-darken);
+}
+
+#aside svg {
+    width: 20px;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    width: 100%;
+}
+
+#footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--footer-height);
+    background-color: var(--dark);
+    color: white;
+}
+
