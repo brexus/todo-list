@@ -12,12 +12,19 @@ export const ScreenController = (() => {
         project1.addTask(task1);
         const task2 = new Task('task 2', 'sienaaaaww', '05.08.2023', true);
         project1.addTask(task2);
-
         System.addProject(project1);
-        // showAddProjectWindow();
-        showProjects();
-        addProjectBtnListener();
+        
+        reloadTodoList();
+    };
 
+    const reloadTodoList = () => {
+        closeAddProjectWindow();
+        showAddProjectButton();
+
+        clearRenderProjects();
+        renderProjects();
+        addProjectBtnListener();
+        loadTasksFromProject();
     };
 
     function updateScreen(todoList) {
@@ -47,14 +54,17 @@ export const ScreenController = (() => {
         
     };
 
+    const clearRenderProjects = () => {
+        const projectsList = document.getElementById("projects-list");
+        projectsList.innerHTML = '';
+    };
 
-    const showProjects = () => {
+    const renderProjects = () => {
         const aside = document.getElementById("aside");
         const projectsTitle = document.getElementById("projects-title");
         const projectsList = document.getElementById("projects-list");
 
         let currentProjectsList = System.getProjectList();
-        projectsList.innerHTML = '';
 
         for (let i = 0; i < currentProjectsList.length; i++) {
             let project = document.createElement('button');
@@ -68,11 +78,14 @@ export const ScreenController = (() => {
     const showAddProjectWindow = () => {
         const addProjectWindow = document.getElementById("add-project-window");
         addProjectWindow.style.display = 'flex';
+        addProjectWindow.classList.remove('disable');
     };
 
     const closeAddProjectWindow = () => {
         const addProjectWindow = document.getElementById("add-project-window");
         addProjectWindow.style.display = 'none';
+        addProjectWindow.classList.add('disable');
+
         const projectTitle = document.getElementById("project-title");
         projectTitle.value = "";
     };
@@ -95,12 +108,10 @@ export const ScreenController = (() => {
         const addProjectBtn = document.getElementById("add-project-btn");
         const addProjectWindow = document.getElementById("add-project-window");
 
-
         addProjectBtn.addEventListener('click', () => {
-            if(addProjectWindow.classList.contains("disable")) {
+            // jak okno dodawanie wyłączone, to włącza
+            if(addProjectWindow.classList.contains('disable')) {
                 showAddProjectWindow();
-                addProjectWindow.classList.toggle('disable');
-                addProjectWindow.classList.toggle('active');
                 closeAddProjectButton();
             } 
         });
@@ -108,26 +119,62 @@ export const ScreenController = (() => {
         const btnSuccess = document.getElementById("btn-success");
         const btnFail = document.getElementById("btn-fail");
 
+        // jak anuluje dodawanie nowego projektu, to wyłacza okno dodawania
         btnFail.addEventListener('click', () => {
-            if(addProjectWindow.classList.contains("active")) {
+            if(addProjectWindow.style.display === 'flex') {
                 closeAddProjectWindow();
-                addProjectWindow.classList.toggle('disable');
-                addProjectWindow.classList.toggle('active');
                 showAddProjectButton();
             }
         });
 
         const projectTitle = document.getElementById("project-title");
 
+        // jak dodaje nowy projekt, to wyłącza okno dodawania i resetuje todo list
         btnSuccess.addEventListener('click', () => {
             const newProject = new Project(projectTitle.value);
             System.addProject(newProject);
-            showProjects();
-            closeAddProjectWindow();
-            showAddProjectButton();
-            addProjectWindow.classList.toggle('disable');
-            addProjectWindow.classList.toggle('active');
+            
+            reloadTodoList();
         });
+    };
+
+
+    const loadTasksFromProject = () => {
+        const projectList = document.getElementById("projects-list");
+        const projectListContent = document.querySelectorAll("#projects-list > *");
+        const mainContent = document.getElementById("main-content");
+        const addTaskBtn = document.getElementById("add-task-btn");
+        const mainTasks = document.getElementById("main-tasks");
+        
+        const h2 = document.querySelector("#main-content > h2");
+
+        for (let i = 0; i < projectListContent.length; i++) {
+            projectListContent[i].addEventListener('click', () => {
+                h2.innerText = "";
+                mainTasks.innerHTML = '';
+                
+                for (let j = 0; j < projectListContent.length; j++) {
+                    projectListContent[j].classList.remove("active");
+                    projectListContent[j].style.fontWeight = "normal";
+                }
+                projectListContent[i].classList.add('active');
+                projectListContent[i].style.fontWeight = "900";
+
+
+                let projectArray = System.getProjectList();
+
+                h2.innerText = projectArray[i].title;
+                let taskArray = (projectArray[i]).getTaskList();
+                addTaskBtn.style.display = 'flex';
+                
+                taskArray.forEach(element => {
+                    let task = document.createElement('button');
+                    task.id = "task-btn";
+                    task.innerText = element.title;
+                    mainTasks.appendChild(task);
+                });
+            });
+        }
     };
 
 
