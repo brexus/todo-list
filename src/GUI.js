@@ -158,7 +158,7 @@ export const ScreenController = (() => {
                     projectListContent[j].style.fontWeight = "normal";
                 }
                 projectListContent[i].classList.add('active');
-                projectListContent[i].style.fontWeight = "900";
+                projectListContent[i].style.fontWeight = "600";
 
 
                 let projectArray = System.getProjectList();
