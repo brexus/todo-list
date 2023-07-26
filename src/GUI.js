@@ -169,8 +169,11 @@ export const ScreenController = (() => {
                 
                 taskArray.forEach(element => {
                     let task = document.createElement('button');
+                    task.style.display = 'flex';
+                    task.style.flexDirection = 'row';
                     task.id = "task-btn";
-                    task.innerText = element.title;
+                    task.innerHTML = `<input type='checkbox' class='task-checkbox'> ${element.title}`
+                    // task.innerText = element.title;
                     mainTasks.appendChild(task);
                 });
             });
