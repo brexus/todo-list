@@ -210,6 +210,13 @@ body {
     display: flex;
     /* border: 1px solid rgb(199, 199, 199); */
     border-radius: 5px;
+    font-size: 1rem;
+}
+
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px
 }
 
 #add-task-btn:hover, #task-btn:hover {
