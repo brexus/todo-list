@@ -15,6 +15,11 @@
     --header-height: 68px;
     --footer-height: 35px;
     --button-height: 40px;
+
+    --success: #31b907;
+    --success-light: #6db856;
+    --fail: #c40000;
+    --fail-light: #b85858;
 }
 
 * {
@@ -55,7 +60,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 300px;
+    width: 400px;
     background-color: var(--light);
     padding: 20px;
 }
@@ -66,15 +71,121 @@ body {
     text-align: left;
 }
 
-#aside > button {
+#projects-list > button, #add-project-btn  {
     width: 100%;
     border: 0;
     border-radius: 5px;
     padding-left: 10px;
     background-color: var(--light);
     cursor: pointer;
+    font-size: 1rem;
     
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 5px;
+
+    height: var(--button-height);
+}
+
+#projects-list > button:hover, #add-project-btn:hover {
+    background-color: var(--light-darken);
+}
+
+#main-aside-container svg {
+    width: 20px;
+    margin-right: 6px;
+}
+
+#projects-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+}
+
+#add-project-btn {
+    margin-top: 10px;
+}
+
+#add-project-window {
+    width: 100%;
+    /* border: 1px solid black; */
+    display: none;
+    flex-direction: column;
+}
+
+#add-project-input-control {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+#add-project-input-control input {
+    padding: 5px 10px;
+    border: 0;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+#add-project-buttons-control {
+    display: flex;
+    flex-direction: row;
+    /* margin-bottom: 20px; */
+}
+
+#add-project-window button {
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 1rem;
+    
+}
+
+#btn-success {
+    background-color: var(--success-light);
+    margin-right: 15px;
+}
+
+#btn-fail {
+    background-color: var(--fail-light);
+}
+
+/* MAIN */
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+}
+
+#main-content {
+    width: min(700px, 90%);
+    height: 100%;
+    background-color: white;
+}
+
+#main-tasks {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* align-items: flex-start; */
+}
+
+#add-task-btn, #task-btn  {
+    width: 100%;
+    border: 0;
+    padding-left: 10px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -82,21 +193,23 @@ body {
     height: var(--button-height);
 }
 
-#aside > button:hover {
+#add-task-btn {
+    display: none;
+    margin-bottom: 5px;
+    margin-bottom: 5px;
+
+}
+
+#task-btn {
+    display: flex;
+    border: 1px solid rgb(199, 199, 199);
+    /* border-radius: 5px; */
+}
+
+#add-task-btn:hover, #task-btn:hover {
     background-color: var(--light-darken);
 }
 
-#aside svg {
-    width: 20px;
-}
-
-#main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: white;
-    width: 100%;
-}
 
 #footer {
     width: 100%;
