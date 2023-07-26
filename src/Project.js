@@ -15,5 +15,3 @@ export default class Project {
     getTaskList = () => this.tasksList;
 
 }
-
-
