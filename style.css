@@ -26,10 +26,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
 }
 
 #content {
@@ -84,7 +86,6 @@ body {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 5px;
 
     height: var(--button-height);
 }
@@ -103,10 +104,6 @@ body {
     flex-direction: column;
     width: 100%;
     
-}
-
-#add-project-btn {
-    margin-top: 10px;
 }
 
 #add-project-window {
