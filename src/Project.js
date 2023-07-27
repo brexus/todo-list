@@ -8,8 +8,8 @@ export default class Project {
         this.tasksList.push(task);
     }
 
-    removeTask(taskName) {
-        this.tasksList = this.tasksList.filter(task => task.title !== taskName);
+    removeTask(_task) {
+        this.tasksList = this.tasksList.filter(task => task !== _task);
     }
 
     getTaskList = () => this.tasksList;
