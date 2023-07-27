@@ -243,7 +243,6 @@ export const ScreenController = (() => {
             task.style.flexDirection = 'row';
             // task.style.justifyContent = 'space-between';
             task.id = "task-btn";
-            console.log(typeof(element.dueDate));
             task.innerHTML =   `<input type='checkbox' class='task-checkbox'>
                                 <span style='display:flex; flex-direction: row; justify-content: space-between; width: 100%;'>
                                     <span>${element.title}</span>
