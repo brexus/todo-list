@@ -30,8 +30,8 @@
                 </div>
 
                 <div id="add-project-buttons-control">
-                    <button id="btn-success">Add</button>
-                    <button id="btn-fail">Cancel</button>
+                    <button class="btn-success">Add</button>
+                    <button class="btn-fail">Cancel</button>
                 </div>
             </div>
 
@@ -40,11 +40,31 @@
         <main id="main">
             <div id="main-content">
                 <h2></h2>
-                <div id="main-tasks">
-                    
-                </div>
+                <div id="main-tasks"></div>
 
                 <button id="add-task-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus-thick</title><path d="M20 14H14V20H10V14H4V10H10V4H14V10H20V14Z" /></svg> Add task</button>
+                
+                <div id="add-task-window" class="disable">
+                    <div id="add-task-input-control">
+                        <label for="task-title">Task title:</label>
+                        <input type="text" name="task-title" id="task-title">
+                    </div>
+
+                    <div id="add-task-input-control">
+                        <label for="task-description">Description:</label>
+                        <input type="text" name="task-description" id="task-description">
+                    </div>
+
+                    <div id="add-task-input-control">
+                        <label for="task-due-date">Due date:</label>
+                        <input type="text" name="task-due-date" id="task-due-date">
+                    </div>
+    
+                    <div id="add-task-buttons-control">
+                        <button class="btn-success">Add</button>
+                        <button class="btn-fail">Cancel</button>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
