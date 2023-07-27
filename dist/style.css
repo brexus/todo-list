@@ -30,10 +30,6 @@
 
 }
 
-body {
-    /* font-family: 'Poppins', sans-serif; */
-}
-
 #content {
     width: 100vw;
     min-height: 100vh;
@@ -143,13 +139,20 @@ body {
     
 }
 
-#btn-success {
-    background-color: var(--success-light);
-    margin-right: 15px;
+.btn-fail:hover, .btn-success:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
 }
 
-#btn-fail {
+.btn-success {
+    background-color: var(--success-light);
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.btn-fail {
     background-color: var(--fail-light);
+    cursor: pointer;
 }
 
 /* MAIN */
@@ -222,6 +225,52 @@ body {
 
 }
 
+
+/* ADD TASKS */
+
+#add-task-window {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+}
+
+#add-task-input-control {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+#add-task-input-control input {
+    padding: 5px 10px;
+    border: 0;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    background-color: var(--light);
+    color: black;
+}
+
+#add-task-buttons-control {
+    display: flex;
+    flex-direction: row;
+    /* margin-bottom: 20px; */
+}
+
+#add-task-window button {
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 1rem;
+    
+}
+
+
+
+
+
+/* FOOTER */
 
 #footer {
     width: 100%;
