@@ -5,6 +5,8 @@ import { System } from "./System";
 export const ScreenController = (() => {
     const todoListContainer = document.getElementById("todo-list");
 
+    let currentProject;
+
     const startTodoList = () => {
 
         const project1 = new Project("Project 1");
@@ -14,45 +16,35 @@ export const ScreenController = (() => {
         project1.addTask(task2);
         System.addProject(project1);
         
-        reloadTodoList();
+        firstLoad();
     };
 
-    const reloadTodoList = () => {
-        closeAddProjectWindow();
-        showAddProjectButton();
+    const firstLoad = () => {
+        reloadAside();
+        clearMain();
 
+        addTaskBtnListener();
+        addProjectBtnListener();
+
+    };
+
+    const reloadAside = () => {
         clearRenderProjects();
         renderProjects();
-        addProjectBtnListener();
-        loadTasksFromProject();
+        closeAddProjectWindow();
+        showAddProjectButton();
+        loadTasksFromProjectListener();
+    };
+    
+    const clearMain = () => {
+        const mainTasks = document.getElementById("main-tasks");
+        const h2 = document.querySelector("#main-content > h2");
+        mainTasks.innerHTML = "";
+        h2.innerHTML = "";
+        closeAddTaskWindow();
+        closeAddTaskButton();
     };
 
-    function updateScreen(todoList) {
-        todoList.forEach(task => {
-            let titleDiv = document.createElement('p');
-            titleDiv.innerText = task.title;
-
-            let descriptionDiv = document.createElement('p');
-            descriptionDiv.innerText = task.description;
-            
-            let dueDateDiv = document.createElement('p');
-            dueDateDiv.innerText = task.dueDate;
-
-            let priorityDiv = document.createElement('p');
-            priorityDiv.innerText = task.priority;
-
-            let taskAll = document.createElement('div');
-
-            taskAll.appendChild(titleDiv);
-            taskAll.appendChild(descriptionDiv);
-            taskAll.appendChild(dueDateDiv);
-            taskAll.appendChild(priorityDiv);
-
-            console.log(taskAll);
-            todoListContainer.appendChild(taskAll);
-        });
-        
-    };
 
     const clearRenderProjects = () => {
         const projectsList = document.getElementById("projects-list");
@@ -73,6 +65,8 @@ export const ScreenController = (() => {
         }
 
     };
+
+
 
 
     const showAddProjectWindow = () => {
@@ -100,7 +94,36 @@ export const ScreenController = (() => {
         addProjectBtn.style.display = 'none';
     };
 
+    const showAddTaskWindow = () => {
+        const addTaskWindow = document.getElementById("add-task-window");
+        addTaskWindow.style.display = 'flex';
+        addTaskWindow.classList.remove('disable');
+    };
 
+    const closeAddTaskWindow = () => {
+        const addTaskWindow = document.getElementById("add-task-window");
+        addTaskWindow.style.display = 'none';
+        addTaskWindow.classList.add('disable');
+
+        // const projectTitle = document.getElementById("task-title");
+        // projectTitle.value = "";
+
+        // const projectDescription = document.getElementById("task-description");
+        // projectDescription.value = "";
+
+        // const projectDueData = document.getElementById("task-due-data");
+        // projectDueData.value = "";
+    };
+
+    const showAddTaskButton = () => {
+        const addTaskBtn = document.getElementById("add-task-btn");
+        addTaskBtn.style.display = 'flex';
+    };
+
+    const closeAddTaskButton = () => {
+        const addTaskBtn = document.getElementById("add-task-btn");
+        addTaskBtn.style.display = 'none';
+    };
 
     // LISTENERS
 
@@ -116,8 +139,8 @@ export const ScreenController = (() => {
             } 
         });
 
-        const btnSuccess = document.getElementById("btn-success");
-        const btnFail = document.getElementById("btn-fail");
+        const btnSuccess = document.querySelector("#add-project-buttons-control > .btn-success");
+        const btnFail = document.querySelector("#add-project-buttons-control > .btn-fail");
 
         // jak anuluje dodawanie nowego projektu, to wyłacza okno dodawania
         btnFail.addEventListener('click', () => {
@@ -134,54 +157,100 @@ export const ScreenController = (() => {
             const newProject = new Project(projectTitle.value);
             System.addProject(newProject);
             
-            reloadTodoList();
+            loadTasksFromProjectListener();
+            reloadAside();
+
         });
     };
 
 
-    const loadTasksFromProject = () => {
-        const projectList = document.getElementById("projects-list");
-        const projectListContent = document.querySelectorAll("#projects-list > *");
-        const mainContent = document.getElementById("main-content");
+    const addTaskBtnListener = () => {
         const addTaskBtn = document.getElementById("add-task-btn");
-        const mainTasks = document.getElementById("main-tasks");
-        
-        const h2 = document.querySelector("#main-content > h2");
+        const addTaskWindow = document.getElementById("add-task-window");
 
-        for (let i = 0; i < projectListContent.length; i++) {
-            projectListContent[i].addEventListener('click', () => {
-                h2.innerText = "";
-                mainTasks.innerHTML = '';
+        addTaskBtn.addEventListener('click', () => {
+            // jak okno dodawanie wyłączone, to włącza
+            if(addTaskWindow.classList.contains('disable')) {
+                showAddTaskWindow();
+                closeAddTaskButton();
+            } 
+        });
+
+        const btnSuccess = document.querySelector("#add-task-buttons-control > .btn-success");
+        const btnFail = document.querySelector("#add-task-buttons-control > .btn-fail");
+
+        // jak anuluje dodawanie nowego projektu, to wyłacza okno dodawania
+        btnFail.addEventListener('click', () => {
+            if(addTaskWindow.style.display === 'flex') {
+                closeAddTaskWindow();
+                showAddTaskButton();
                 
-                for (let j = 0; j < projectListContent.length; j++) {
-                    projectListContent[j].classList.remove("active");
-                    projectListContent[j].style.fontWeight = "normal";
-                }
-                projectListContent[i].classList.add('active');
-                projectListContent[i].style.fontWeight = "600";
+            }
+        });
 
+        const taskTitle = document.getElementById("task-title");
+        const taskDescription = document.getElementById("task-description");
+        const taskDueDate = document.getElementById("task-due-date");
 
-                let projectArray = System.getProjectList();
+        // jak dodaje nowy projekt, to wyłącza okno dodawania i resetuje todo list
+        btnSuccess.addEventListener('click', () => {
+            currentProject.addTask(new Task(taskTitle.value, taskDescription.value, taskDueDate.value, false));
+            
+            reloadTasks();
 
-                h2.innerText = projectArray[i].title;
-                let taskArray = (projectArray[i]).getTaskList();
-                addTaskBtn.style.display = 'flex';
-                
-                taskArray.forEach(element => {
-                    let task = document.createElement('button');
-                    task.style.display = 'flex';
-                    task.style.flexDirection = 'row';
-                    task.id = "task-btn";
-                    task.innerHTML = `<input type='checkbox' class='task-checkbox'> ${element.title}`
-                    // task.innerText = element.title;
-                    mainTasks.appendChild(task);
-                });
-            });
-        }
+            //reloadTasksFromCurrentProject();
+        });
     };
 
 
 
-    return { startTodoList, updateScreen, showAddProjectWindow };
+
+    const loadTasksFromProjectListener = () => {
+        const projectListAside = document.querySelectorAll("#projects-list > *");
+
+        for (let i = 0; i < projectListAside.length; i++) {
+            projectListAside[i].addEventListener('click', () => {
+                // Ustawianie aktualnie wybranego projektu
+                currentProject = (System.getProjectList())[i];
+
+                // Pogrubienie napisu wybranego projektu
+                for (let j = 0; j < projectListAside.length; j++) {
+                    projectListAside[j].classList.remove("active");
+                    projectListAside[j].style.fontWeight = "normal";
+                }
+                projectListAside[i].classList.add('active');
+                projectListAside[i].style.fontWeight = "600";
+                
+                // reloadAside();
+                reloadTasks();
+                
+            });
+        }
+    };
+
+    const reloadTasks = () => {
+        const h2 = document.querySelector("#main-content > h2");
+        const mainTasks = document.getElementById("main-tasks");
+
+        clearMain();
+
+        h2.innerHTML = currentProject.title;
+        let taskList = currentProject.getTaskList();
+        
+        taskList.forEach(element => {
+            let task = document.createElement('button');
+            task.style.display = 'flex';
+            task.style.flexDirection = 'row';
+            task.id = "task-btn";
+            task.innerHTML = `<input type='checkbox' class='task-checkbox'> ${element.title}`
+            // task.innerText = element.title;
+            mainTasks.appendChild(task);
+        });
+
+        showAddTaskButton();
+    };
+
+
+    return { startTodoList };
 })();
 
