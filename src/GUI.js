@@ -10,9 +10,9 @@ export const ScreenController = (() => {
     const startTodoList = () => {
 
         const project1 = new Project("Project 1");
-        const task1 = new Task('task 1', 'elo', '29.07.2023', true);
+        const task1 = new Task('task 1', 'elo', '2023-07-29', false);
         project1.addTask(task1);
-        const task2 = new Task('task 2', 'sienaaaaww', '05.08.2023', true);
+        const task2 = new Task('task 2', 'sienaaaaww', '2023-08-05', false);
         project1.addTask(task2);
         System.addProject(project1);
         
@@ -241,13 +241,31 @@ export const ScreenController = (() => {
             let task = document.createElement('button');
             task.style.display = 'flex';
             task.style.flexDirection = 'row';
+            // task.style.justifyContent = 'space-between';
             task.id = "task-btn";
-            task.innerHTML = `<input type='checkbox' class='task-checkbox'> ${element.title}`
-            // task.innerText = element.title;
+            console.log(typeof(element.dueDate));
+            task.innerHTML =   `<input type='checkbox' class='task-checkbox'>
+                                <span style='display:flex; flex-direction: row; justify-content: space-between; width: 100%;'>
+                                    <span>${element.title}</span>
+                                    <span>${element.dueDate}</span>
+                                </span>`
             mainTasks.appendChild(task);
         });
 
         showAddTaskButton();
+        checkboxListener();
+    };
+
+    const checkboxListener = () => {
+        let taskButton = document.querySelectorAll("#task-btn > input");
+
+        for (let i = 0; i < taskButton.length; i++) {
+            taskButton[i].addEventListener('click', () => {
+                let task = (currentProject.getTaskList())[i];
+                currentProject.removeTask(task);
+                reloadTasks();
+            });
+        }
     };
 
 
