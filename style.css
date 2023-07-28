@@ -38,7 +38,7 @@
 }
 
 
-/* ============== HEADER ==============  */
+/* ======================= HEADER =======================  */
 #header {
     background-color: var(--dark);
     color: white;
@@ -76,7 +76,7 @@
     width: 100%;
 }
 
-/* ============== ASIDE ==============  */
+/* ======================= ASIDE =======================  */
 #aside {
     display: flex;
     flex-direction: column;
@@ -129,45 +129,6 @@
     margin-right: 6px;
 }
 
-
-
-#add-project-window {
-    width: 100%;
-    /* border: 1px solid black; */
-    display: none;
-    flex-direction: column;
-}
-
-#add-project-input-control {
-    display: flex;
-    flex-direction: column;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-}
-
-#project-title {
-    padding: 4px 10px;
-    border: 0;
-    border-radius: 5px;
-    font-size: 1.1rem;
-}
-
-#add-project-buttons-control {
-    display: flex;
-    flex-direction: row;
-    /* margin-bottom: 20px; */
-}
-
-#add-project-window button {
-    width: 100%;
-    border: 0;
-    border-radius: 5px;
-    padding: 5px;
-    color: white;
-    font-size: 1rem;
-    
-}
-
 .separator {
     width: 100%;
     background-color: rgb(170, 170, 170);
@@ -176,23 +137,9 @@
     display: none;
 }
 
-.btn-fail:hover, .btn-success:hover {
-    transform: scale(1.05);
-    transition: 0.2s;
-}
 
-.btn-success {
-    background-color: var(--success-light);
-    margin-right: 15px;
-    cursor: pointer;
-}
 
-.btn-fail {
-    background-color: var(--fail-light);
-    cursor: pointer;
-}
-
-/* MAIN */
+/* ======================= MAIN =======================  */
 #main {
     display: flex;
     flex-direction: column;
@@ -268,11 +215,16 @@
 
 #add-task-btn:hover, #task-btn:hover {
     background-color: var(--light-darken);
-    border-radius: 5px;
 }
 
+/* ======================= ADD PROJECT AND TASK CONTROL =======================  */
 
-/* ADD TASKS */
+#add-project-window {
+    width: 100%;
+    /* border: 1px solid black; */
+    display: none;
+    flex-direction: column;
+}
 
 #add-task-window {
     width: 100%;
@@ -280,41 +232,96 @@
     flex-direction: column;
 }
 
-#add-task-input-control {
+#add-project-input-control {
     display: flex;
     flex-direction: column;
     font-size: 1.2rem;
     margin-bottom: 15px;
 }
 
-#add-task-input-control input {
-    padding: 5px 10px;
+#project-title {
+    padding: 4px 10px;
     border: 0;
     border-radius: 5px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+}
+
+.add-project-buttons-control {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* margin-bottom: 20px; */
+}
+
+.success-fail-btns {
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.success-fail-btns:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+.btn-success {
+    background-color: var(--success-light);
+    margin-right: 7px;
+}
+
+.btn-fail {
+    background-color: var(--fail-light);
+    margin-left: 7px;
+}
+
+
+
+.add-task-input-control {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.add-task-input-control input {
+    padding: 4px 10px;
+    border: 0;
+    border-radius: 5px;
+    font-size: 1.1rem;
     background-color: var(--light);
     color: black;
 }
 
-#add-task-buttons-control {
+.add-task-buttons-control {
     display: flex;
     flex-direction: row;
+    width: 100%;
     /* margin-bottom: 20px; */
 }
 
-#add-task-window button {
-    width: 100%;
-    border: 0;
-    border-radius: 5px;
-    padding: 10px;
-    color: white;
-    font-size: 1rem;
-    
+#title-dueDate-container {
+    display: flex;
+    flex-direction: row;
 }
 
+#title-dueDate-container > * {
+    width: 50%;
+}
 
+#title-dueDate-container > *:nth-child(1) {
+    margin-right: 8px;
+}
 
-/* FOOTER */
+#title-dueDate-container > *:nth-child(2) {
+    margin-left: 8px;
+}
+
+/* ======================= FOOTER =======================  */
 
 #footer {
     width: 100%;
