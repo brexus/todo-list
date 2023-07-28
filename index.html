@@ -34,9 +34,9 @@
                     <input type="text" name="project-title" id="project-title">
                 </div>
 
-                <div id="add-project-buttons-control">
-                    <button class="btn-success">Add</button>
-                    <button class="btn-fail">Cancel</button>
+                <div class="add-project-buttons-control">
+                    <button class="btn-success success-fail-btns">Add</button>
+                    <button class="btn-fail success-fail-btns">Cancel</button>
                 </div>
             </div>
 
@@ -52,27 +52,44 @@
                 <button id="add-task-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus-thick</title><path d="M20 14H14V20H10V14H4V10H10V4H14V10H20V14Z" /></svg> Add task</button>
                 
                 <div id="add-task-window" class="disable">
-                    <div id="add-task-input-control">
-                        <label for="task-title">Task title:</label>
-                        <input type="text" name="task-title" id="task-title">
+                    <div id="title-dueDate-container">
+                        <div class="add-task-input-control">
+                            <label for="task-title">Task title:</label>
+                            <input type="text" name="task-title" id="task-title">
+                        </div>
+    
+                        <div class="add-task-input-control">
+                            <label for="task-due-date">Due date:</label>
+                            <input type="date" name="task-due-date" id="task-due-date">
+                        </div>
                     </div>
 
-                    <div id="add-task-input-control">
+
+                    <div class="add-task-input-control">
                         <label for="task-description">Description:</label>
                         <input type="text" name="task-description" id="task-description">
                     </div>
 
-                    <div id="add-task-input-control">
-                        <label for="task-due-date">Due date:</label>
-                        <input type="date" name="task-due-date" id="task-due-date">
-                    </div>
-    
-                    <div id="add-task-buttons-control">
-                        <button class="btn-success">Add</button>
-                        <button class="btn-fail">Cancel</button>
+                    <div class="add-task-buttons-control">
+                        <button class="btn-success success-fail-btns">Add</button>
+                        <button class="btn-fail success-fail-btns">Cancel</button>
                     </div>
                 </div>
             </div>
+
+            <div id="details-window">
+                <svg id="btn-description-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>close</title><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg>        
+                
+                <h1>Title:</h1>
+                <p id="title-detail-window"></p>
+
+                <h1>Due Date: </h1>
+                <p id="due-date-detail-window"></p>
+
+                <h1>Description:</h1>
+                <p id="description-detail-window"></p>
+            </div>
+
         </main>
     </div>
 
