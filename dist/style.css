@@ -217,6 +217,11 @@
     background-color: var(--light-darken);
 }
 
+#task-btn > span > span {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 /* ======================= ADD PROJECT AND TASK CONTROL =======================  */
 
 #add-project-window {
@@ -320,6 +325,61 @@
 #title-dueDate-container > *:nth-child(2) {
     margin-left: 8px;
 }
+
+/* ======================= DESCRIPTION WINDOW =======================  */
+
+#details-window {
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30px;
+
+    /* color: white; */
+    /* background-color: var(--dark); */
+    background-color: var(--dark);
+    color: white;
+
+    border-radius: 20px;
+    height: auto;
+
+    width: min(300px, 100%);
+    /* min-width: 280px; */
+    box-sizing: border-box;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    
+    transform: translate(-50%, -50%);
+
+}
+
+#details-window > svg {
+    fill: white;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+
+#details-window > svg:hover {
+    fill: var(--fail);
+    transform: scale(1.2);
+    transition: 0.2s;
+}
+
+#details-window > h1 {
+    font-size: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* ======================= FOOTER =======================  */
 
