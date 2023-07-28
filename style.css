@@ -178,6 +178,7 @@
     background-color: rgb(170, 170, 170);
     height: 1px;
     margin: 20px 0;
+    display: none;
 }
 
 .btn-fail:hover, .btn-success:hover {
