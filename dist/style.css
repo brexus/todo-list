@@ -116,13 +116,8 @@
     height: var(--button-height);
 }
 
-#projects-list > button {
-
-}
-
 #add-project-btn {
     white-space: nowrap;
-
 }
 
 #projects-list > button:hover, #add-project-btn:hover {
