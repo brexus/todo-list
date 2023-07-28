@@ -43,6 +43,7 @@ export const ScreenController = (() => {
         h2.innerHTML = "";
         closeAddTaskWindow();
         closeAddTaskButton();
+        closeTaskSeparator();
     };
 
 
@@ -125,6 +126,16 @@ export const ScreenController = (() => {
         addTaskBtn.style.display = 'none';
     };
 
+    const showTaskSeparator = () => {
+        const separator = document.querySelector("#main-content > div.separator");
+        separator.style.display = "flex";
+    };
+
+    const closeTaskSeparator = () => {
+        const separator = document.querySelector("#main-content > div.separator");
+        separator.style.display = "none";
+    };
+
     // LISTENERS
 
     const addProjectBtnListener = () => {
@@ -159,7 +170,7 @@ export const ScreenController = (() => {
             
             loadTasksFromProjectListener();
             reloadAside();
-
+            clearMain();
         });
     };
 
@@ -251,6 +262,7 @@ export const ScreenController = (() => {
             mainTasks.appendChild(task);
         });
 
+        showTaskSeparator();
         showAddTaskButton();
         checkboxListener();
     };
