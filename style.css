@@ -222,6 +222,14 @@
     white-space: nowrap;
 }
 
+#tasks-legend {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10px;
+    margin-left: 27px;
+}
+
 /* ======================= ADD PROJECT AND TASK CONTROL =======================  */
 
 #add-project-window {
