@@ -25,7 +25,7 @@ export const ScreenController = (() => {
 
         addTaskBtnListener();
         addProjectBtnListener();
-
+        taskDetailCloseListener();
     };
 
     const reloadAside = () => {
@@ -44,6 +44,7 @@ export const ScreenController = (() => {
         closeAddTaskWindow();
         closeAddTaskButton();
         closeTaskSeparator();
+        closeTaskDetailsWindow();
     };
 
 
@@ -150,8 +151,8 @@ export const ScreenController = (() => {
             } 
         });
 
-        const btnSuccess = document.querySelector("#add-project-buttons-control > .btn-success");
-        const btnFail = document.querySelector("#add-project-buttons-control > .btn-fail");
+        const btnSuccess = document.querySelector(".add-project-buttons-control > .btn-success");
+        const btnFail = document.querySelector(".add-project-buttons-control > .btn-fail");
 
         // jak anuluje dodawanie nowego projektu, to wyłacza okno dodawania
         btnFail.addEventListener('click', () => {
@@ -187,8 +188,8 @@ export const ScreenController = (() => {
             } 
         });
 
-        const btnSuccess = document.querySelector("#add-task-buttons-control > .btn-success");
-        const btnFail = document.querySelector("#add-task-buttons-control > .btn-fail");
+        const btnSuccess = document.querySelector(".add-task-buttons-control > .btn-success");
+        const btnFail = document.querySelector(".add-task-buttons-control > .btn-fail");
 
         // jak anuluje dodawanie nowego projektu, to wyłacza okno dodawania
         btnFail.addEventListener('click', () => {
@@ -234,7 +235,6 @@ export const ScreenController = (() => {
                 
                 // reloadAside();
                 reloadTasks();
-                
             });
         }
     };
@@ -265,6 +265,7 @@ export const ScreenController = (() => {
         showTaskSeparator();
         showAddTaskButton();
         checkboxListener();
+        taskDetailsWindowListeners();
     };
 
     const checkboxListener = () => {
@@ -279,6 +280,44 @@ export const ScreenController = (() => {
         }
     };
 
+    const taskDetailsWindowListeners = () => {
+        const taskBtns = document.querySelectorAll("#task-btn");
+        const detailsWindow = document.getElementById("details-window");
+
+        const titleDetail = document.getElementById("title-detail-window");
+        const dueDateDetail = document.getElementById("due-date-detail-window");
+        const descriptionDetail = document.getElementById("description-detail-window");
+
+
+        for (let i = 0; i < taskBtns.length; i++) {
+            taskBtns[i].addEventListener('click', () => {
+                showTaskDetailsWindow();
+                let task = (currentProject.getTaskList())[i];
+                // console.log(task);
+                titleDetail.innerText = `'${task.title}'`;
+                dueDateDetail.innerText = `${task.dueDate}`;
+                descriptionDetail.innerText = `'${task.description}'`;
+            });
+        }
+    };
+
+    const showTaskDetailsWindow = () => {
+        const descriptionWindow = document.getElementById("details-window");
+        descriptionWindow.style.display = "flex";
+    };
+
+    const closeTaskDetailsWindow = () => {
+        const descriptionWindow = document.getElementById("details-window");
+        descriptionWindow.style.display = "none";
+    };
+
+    const taskDetailCloseListener = () => {
+        const close = document.getElementById("btn-description-close");
+
+        close.addEventListener('click', () => {
+            closeTaskDetailsWindow();
+        });
+    }
 
     return { startTodoList };
 })();
