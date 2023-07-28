@@ -45,6 +45,7 @@ export const ScreenController = (() => {
         closeAddTaskButton();
         closeTaskSeparator();
         closeTaskDetailsWindow();
+        document.getElementById("tasks-legend").innerHTML = "";
     };
 
 
@@ -242,12 +243,15 @@ export const ScreenController = (() => {
     const reloadTasks = () => {
         const h2 = document.querySelector("#main-content > h2");
         const mainTasks = document.getElementById("main-tasks");
+        const tasksLegend = document.getElementById("tasks-legend");
 
         clearMain();
 
         h2.innerHTML = currentProject.title;
         let taskList = currentProject.getTaskList();
         
+        tasksLegend.innerHTML = `<h4>Title:</h4><h4>Due date:</h4>`;
+
         taskList.forEach(element => {
             let task = document.createElement('button');
             task.style.display = 'flex';
