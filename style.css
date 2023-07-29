@@ -181,7 +181,8 @@
 }
 
 #main-content > h2 {
-    margin-bottom: 15px;
+    margin-bottom: 40px;
+    font-size: 1.8rem;
 }
 
 
@@ -360,7 +361,12 @@
     left: 50%;
     
     transform: translate(-50%, -50%);
+}
 
+.disable-background {
+    opacity: 0.5;
+    z-index: -999;
+    filter: blur(5px) brightness(0.6);
 }
 
 #details-window > svg {
