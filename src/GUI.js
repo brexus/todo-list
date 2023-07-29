@@ -108,11 +108,11 @@ export const ScreenController = (() => {
         addTaskWindow.style.display = 'none';
         addTaskWindow.classList.add('disable');
 
-        // const projectTitle = document.getElementById("task-title");
-        // projectTitle.value = "";
+        const projectTitle = document.getElementById("task-title");
+        projectTitle.value = "";
 
-        // const projectDescription = document.getElementById("task-description");
-        // projectDescription.value = "";
+        const projectDescription = document.getElementById("task-description");
+        projectDescription.value = "";
 
         // const projectDueData = document.getElementById("task-due-data");
         // projectDueData.value = "";
@@ -233,29 +233,14 @@ export const ScreenController = (() => {
             //     reloadTasks();
             // }
 
-
             if(taskTitle.value.trim() !== "") {
                 let taskList = currentProject.getTaskList();
-                let control = 0;
-
-                taskList.forEach(task => {
-                    if(task.title.trim() !== taskTitle.value.trim()) {
-                        control++;
-                    }
-                });
-
-                if(control === taskList.length) {
-                    currentProject.addTask(new Task(taskTitle.value, taskDescription.value, taskDueDate.value, false));
-                    reloadTasks();
-                } else {
-                    alert("The title is already taken");
-                }
+                currentProject.addTask(new Task(taskTitle.value, taskDescription.value, taskDueDate.value, false));
+                reloadTasks();
+                
             } else {
                 alert("The title cannot be empty");
             }
-            control = 0;
-
-
         });
     };
 
