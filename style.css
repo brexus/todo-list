@@ -189,8 +189,7 @@
 #add-task-btn {
     display: none;
     margin-bottom: 5px;
-    margin-bottom: 5px;
-
+    border-radius: 5px;
 }
 
 #task-btn {
@@ -259,6 +258,8 @@
     border-radius: 5px;
     font-size: 1.1rem;
 }
+
+
 
 .add-project-buttons-control {
     display: flex;
