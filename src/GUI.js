@@ -174,7 +174,6 @@ export const ScreenController = (() => {
                 reloadAside();
                 clearMain();
             }
-
         });
     };
 
@@ -209,11 +208,11 @@ export const ScreenController = (() => {
 
         // jak dodaje nowy projekt, to wyłącza okno dodawania i resetuje todo list
         btnSuccess.addEventListener('click', () => {
-            currentProject.addTask(new Task(taskTitle.value, taskDescription.value, taskDueDate.value, false));
-            
-            reloadTasks();
+            if(taskTitle.value.trim() !== "") {
+                currentProject.addTask(new Task(taskTitle.value, taskDescription.value, taskDueDate.value, false));
+                reloadTasks();
+            }
 
-            //reloadTasksFromCurrentProject();
         });
     };
 
@@ -261,7 +260,7 @@ export const ScreenController = (() => {
             // task.style.justifyContent = 'space-between';
             task.id = "task-btn";
             task.innerHTML =   `<input type='checkbox' class='task-checkbox'>
-                                <span style='display:flex; flex-direction: row; justify-content: space-between; width: 100%;'>
+                                <span class='task-date-container' style='display:flex; flex-direction: row; justify-content: space-between; width: 100%;'>
                                     <span>${element.title}</span>
                                     <span>${element.dueDate}</span>
                                 </span>`
@@ -287,7 +286,7 @@ export const ScreenController = (() => {
     };
 
     const taskDetailsWindowListeners = () => {
-        const taskBtns = document.querySelectorAll("#task-btn");
+        const taskBtns = document.querySelectorAll(".task-date-container");
         const detailsWindow = document.getElementById("details-window");
 
         const titleDetail = document.getElementById("title-detail-window");
