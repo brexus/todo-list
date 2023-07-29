@@ -129,12 +129,19 @@
     margin-right: 6px;
 }
 
+.project-close:hover {
+    fill: var(--fail);
+    transform: scale(1.2);
+    transition: 0.2s;
+}
+
 .separator {
     width: 100%;
     background-color: rgb(170, 170, 170);
     height: 1px;
     margin: 20px 0;
     display: none;
+    
 }
 
 
