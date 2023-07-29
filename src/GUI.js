@@ -165,15 +165,33 @@ export const ScreenController = (() => {
 
         const projectTitle = document.getElementById("project-title");
 
+
+        const projectList = System.getProjectList();
+        let control = 0;
+
         // jak dodaje nowy projekt, to wyłącza okno dodawania i resetuje todo list
         btnSuccess.addEventListener('click', () => {
             if(projectTitle.value.trim() !== "") {
-                const newProject = new Project(projectTitle.value);
-                System.addProject(newProject);
-                loadTasksFromProjectListener();
-                reloadAside();
-                clearMain();
+
+                projectList.forEach(project => {
+                    if(project.title.trim() !== projectTitle.value.trim()) {
+                        control++;
+                    }
+                });
+
+                if(control === projectList.length) {
+                    const newProject = new Project(projectTitle.value);
+                    System.addProject(newProject);
+                    loadTasksFromProjectListener();
+                    reloadAside();
+                    clearMain();
+                } else {
+                    alert("The title is already taken");
+                }
+            } else {
+                alert("The title cannot be empty");
             }
+            control = 0;
         });
     };
 
