@@ -9,8 +9,8 @@ export const ScreenController = (() => {
 
     const startTodoList = () => {
 
-        const project1 = new Project("Project 1");
-        const task1 = new Task('task 1', 'elo', '2023-07-29', false);
+        const project1 = new Project("Test 1");
+        const task1 = new Task('task 1', 'Lorem apsem impum alerte', '2023-07-29', false);
         project1.addTask(task1);
         const task2 = new Task('task 2', 'sienaaaaww', '2023-08-05', false);
         project1.addTask(task2);
@@ -308,11 +308,17 @@ export const ScreenController = (() => {
     const showTaskDetailsWindow = () => {
         const descriptionWindow = document.getElementById("details-window");
         descriptionWindow.style.display = "flex";
+        
+        const content = document.getElementById("main-aside-container");
+        content.classList.add("disable-background");
     };
 
     const closeTaskDetailsWindow = () => {
         const descriptionWindow = document.getElementById("details-window");
         descriptionWindow.style.display = "none";
+
+        const content = document.getElementById("main-aside-container");
+        content.classList.remove("disable-background");
     };
 
     const taskDetailCloseListener = () => {
@@ -321,7 +327,7 @@ export const ScreenController = (() => {
         close.addEventListener('click', () => {
             closeTaskDetailsWindow();
         });
-    }
+    };
 
     return { startTodoList };
 })();
