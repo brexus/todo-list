@@ -167,12 +167,14 @@ export const ScreenController = (() => {
 
         // jak dodaje nowy projekt, to wyłącza okno dodawania i resetuje todo list
         btnSuccess.addEventListener('click', () => {
-            const newProject = new Project(projectTitle.value);
-            System.addProject(newProject);
-            
-            loadTasksFromProjectListener();
-            reloadAside();
-            clearMain();
+            if(projectTitle.value.trim() !== "") {
+                const newProject = new Project(projectTitle.value);
+                System.addProject(newProject);
+                loadTasksFromProjectListener();
+                reloadAside();
+                clearMain();
+            }
+
         });
     };
 
