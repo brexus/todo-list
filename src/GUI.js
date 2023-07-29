@@ -22,8 +22,8 @@ export const ScreenController = (() => {
     const firstLoad = () => {
         reloadAside();
         clearMain();
-
         addTaskBtnListener();
+
         addProjectBtnListener();
         taskDetailCloseListener();
     };
@@ -224,12 +224,37 @@ export const ScreenController = (() => {
         const taskDescription = document.getElementById("task-description");
         const taskDueDate = document.getElementById("task-due-date");
 
+
+
         // jak dodaje nowy projekt, to wyłącza okno dodawania i resetuje todo list
         btnSuccess.addEventListener('click', () => {
+            // if(taskTitle.value.trim() !== "") {
+            //     currentProject.addTask(new Task(taskTitle.value, taskDescription.value, taskDueDate.value, false));
+            //     reloadTasks();
+            // }
+
+
             if(taskTitle.value.trim() !== "") {
-                currentProject.addTask(new Task(taskTitle.value, taskDescription.value, taskDueDate.value, false));
-                reloadTasks();
+                let taskList = currentProject.getTaskList();
+                let control = 0;
+
+                taskList.forEach(task => {
+                    if(task.title.trim() !== taskTitle.value.trim()) {
+                        control++;
+                    }
+                });
+
+                if(control === taskList.length) {
+                    currentProject.addTask(new Task(taskTitle.value, taskDescription.value, taskDueDate.value, false));
+                    reloadTasks();
+                } else {
+                    alert("The title is already taken");
+                }
+            } else {
+                alert("The title cannot be empty");
             }
+            control = 0;
+
 
         });
     };
@@ -255,6 +280,7 @@ export const ScreenController = (() => {
                 
                 // reloadAside();
                 reloadTasks();
+                
             });
         }
     };
