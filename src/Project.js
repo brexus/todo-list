@@ -1,4 +1,5 @@
 import { StorageController } from "./Storage";
+import Task from "./Task";
 
 export default class Project {
     constructor(title) {
@@ -8,6 +9,11 @@ export default class Project {
 
     addTask(task) {
         this.tasksList.push(task);
+
+        this.tasksList.sort(function(a,b){
+            return new Date(a.dueDate) - new Date(b.dueDate);
+        });
+
         StorageController.updateStorage();
     }
 
