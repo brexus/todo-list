@@ -1,6 +1,7 @@
 import Task from "./Task";
 import Project from "./Project";
 import { System } from "./System";
+import { StorageController } from "./Storage";
 
 export const ScreenController = (() => {
     const todoListContainer = document.getElementById("todo-list");
@@ -9,23 +10,26 @@ export const ScreenController = (() => {
 
     const startTodoList = () => {
 
-        const project1 = new Project("Test 1");
-        const task1 = new Task('task 1', 'Lorem apsem impum alerte', '2023-07-29', false);
-        project1.addTask(task1);
-        const task2 = new Task('task 2', 'sienaaaaww', '2023-08-05', false);
-        project1.addTask(task2);
-        System.addProject(project1);
+        // const project1 = new Project("Test 1");
+        // const task1 = new Task('task 1', 'Lorem apsem impum alerte', '2023-07-29', false);
+        // project1.addTask(task1);
+        // const task2 = new Task('task 2', 'sienaaaaww', '2023-08-05', false);
+        // project1.addTask(task2);
+        // System.addProject(project1);
         
         firstLoad();
     };
 
     const firstLoad = () => {
+        StorageController.loadStorage();
         reloadAside();
         clearMain();
         addTaskBtnListener();
 
         addProjectBtnListener();
         taskDetailCloseListener();
+
+        // console.log(JSON.stringify(System.getProjectList()));
     };
 
     const reloadAside = () => {
@@ -65,11 +69,13 @@ export const ScreenController = (() => {
         for (let i = 0; i < currentProjectsList.length; i++) {
             let project = document.createElement('button');
             project.innerHTML = 
-                                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>format-list-checkbox</title><path d="M21,19V17H8V19H21M21,13V11H8V13H21M8,7H21V5H8V7M4,5V7H6V5H4M3,5A1,1 0 0,1 4,4H6A1,1 0 0,1 7,5V7A1,1 0 0,1 6,8H4A1,1 0 0,1 3,7V5M4,11V13H6V11H4M3,11A1,1 0 0,1 4,10H6A1,1 0 0,1 7,11V13A1,1 0 0,1 6,14H4A1,1 0 0,1 3,13V11M4,17V19H6V17H4M3,17A1,1 0 0,1 4,16H6A1,1 0 0,1 7,17V19A1,1 0 0,1 6,20H4A1,1 0 0,1 3,19V17Z" /></svg>
-                                <div style='width:100%; display: flex; flex-direction: row; justify-content: space-between; align-items: center;'>
+                                `<div style='width:100%; display: flex; flex-direction: row; justify-content: flex-start; align-items: center;'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>format-list-checkbox</title><path d="M21,19V17H8V19H21M21,13V11H8V13H21M8,7H21V5H8V7M4,5V7H6V5H4M3,5A1,1 0 0,1 4,4H6A1,1 0 0,1 7,5V7A1,1 0 0,1 6,8H4A1,1 0 0,1 3,7V5M4,11V13H6V11H4M3,11A1,1 0 0,1 4,10H6A1,1 0 0,1 7,11V13A1,1 0 0,1 6,14H4A1,1 0 0,1 3,13V11M4,17V19H6V17H4M3,17A1,1 0 0,1 4,16H6A1,1 0 0,1 7,17V19A1,1 0 0,1 6,20H4A1,1 0 0,1 3,19V17Z" /></svg>
                                     ${currentProjectsList[i].title}
-                                    <svg class='project-close' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>close</title><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
-                                </div>`;
+                                </div>
+
+                                <svg class='project-close' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>close</title><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+                                `;
             projectsList.appendChild(project);
         }
 
@@ -182,13 +188,13 @@ export const ScreenController = (() => {
         const projectTitle = document.getElementById("project-title");
 
 
-
+        let control;
 
         // jak dodaje nowy projekt, to wyłącza okno dodawania i resetuje todo list
         btnSuccess.addEventListener('click', () => {
             if(projectTitle.value.trim() !== "") {
                 const projectList = System.getProjectList();
-                let control = 0;
+                control = 0;
                 
                 projectList.forEach(project => {
                     if(project.title.trim() !== projectTitle.value.trim()) {
@@ -202,6 +208,7 @@ export const ScreenController = (() => {
                     loadTasksFromProjectListener();
                     reloadAside();
                     clearMain();
+                    // StorageController.updateStorage();
                 } else {
                     alert("The title is already taken");
                 }
@@ -254,6 +261,7 @@ export const ScreenController = (() => {
                 let taskList = currentProject.getTaskList();
                 currentProject.addTask(new Task(taskTitle.value, taskDescription.value, taskDueDate.value, false));
                 reloadTasks();
+                // StorageController.updateStorage();
                 
             } else {
                 alert("The title cannot be empty");
@@ -265,7 +273,7 @@ export const ScreenController = (() => {
 
 
     const loadTasksFromProjectListener = () => {
-        const projectListAside = document.querySelectorAll("#projects-list > *");
+        const projectListAside = document.querySelectorAll("#projects-list > button > div");
 
         for (let i = 0; i < projectListAside.length; i++) {
             projectListAside[i].addEventListener('click', () => {
@@ -294,7 +302,7 @@ export const ScreenController = (() => {
 
         clearMain();
 
-        h2.innerHTML = currentProject.title;
+        h2.innerText = currentProject.title;
         let taskList = currentProject.getTaskList();
         
         tasksLegend.innerHTML = `<h4>Title:</h4><h4>Due date:</h4>`;
