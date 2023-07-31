@@ -37,6 +37,16 @@
     flex-direction: column;
 }
 
+@keyframes slideOut {
+    from { display: flex; }
+    to { transform: translateX(-300px);}
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-300px);}
+    to { transform: translateX(0);}
+}
+
 
 /* ======================= HEADER =======================  */
 #header {
@@ -45,7 +55,7 @@
     height: var(--header-height);
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    padding-left: 5px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -60,10 +70,24 @@
 
 }
 
-#header svg {
+#header > h1 > svg {
     width: 45px;
     fill: white;
     margin-left: 10px;
+}
+
+/* HAMBURGER */
+#header > svg {
+    width: 45px;
+    fill: white;
+    margin-left: 10px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+
+#header > svg:active {
+    transform: scale(1.1);
+    /* transition: 0.1s; */
 }
 
 
@@ -85,7 +109,7 @@
     width: max-content;
     background-color: var(--light);
     padding: 20px 40px 20px 20px;
-    
+
 }
 
 #aside > h2 {
