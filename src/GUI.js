@@ -29,6 +29,8 @@ export const ScreenController = (() => {
         addProjectBtnListener();
         taskDetailCloseListener();
 
+        hamburgerListener();
+
         // console.log(JSON.stringify(System.getProjectList()));
     };
 
@@ -382,6 +384,49 @@ export const ScreenController = (() => {
         close.addEventListener('click', () => {
             closeTaskDetailsWindow();
         });
+    };
+
+    const hamburgerListener = () => {
+        const hamburger = document.getElementById('hamburger');
+        const aside = document.getElementById('aside');
+
+
+        hamburger.addEventListener('click', () => {
+            if(aside.classList.contains("active")) {
+                closeAsideMenu();
+            } else {
+                openAsideMenu();
+            }
+        });
+    };
+
+    const closeAsideMenu = () => {
+        const aside = document.getElementById('aside');
+        aside.classList.remove('active');
+        
+        // aside.style.transform = 'scale(0)';
+        // aside.style.transition = "1s";
+        
+        aside.style.animation = "slideOut 200ms";
+        aside.style.display = 'none';
+
+
+        // window.setTimeout(() => {
+        // }, 2000);
+
+    };
+
+    const openAsideMenu = () => {
+        const aside = document.getElementById('aside');
+        aside.classList.add('active');
+        
+        // aside.style.transform = 'scale(1)';
+        // aside.style.transition = "4s ease-in";
+        aside.style.display = 'flex';
+
+        aside.style.animation = "slideIn 200ms";
+
+        // aside.style.display = 'flex';
     };
 
     return { startTodoList };
