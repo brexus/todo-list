@@ -394,8 +394,10 @@ export const ScreenController = (() => {
         hamburger.addEventListener('click', () => {
             if(aside.classList.contains("active")) {
                 closeAsideMenu();
+                hamburger.innerHTML = `<title>menu</title><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />`;
             } else {
                 openAsideMenu();
+                hamburger.innerHTML = `<title>close</title><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />`;
             }
         });
     };
@@ -407,9 +409,9 @@ export const ScreenController = (() => {
         // aside.style.transform = 'scale(0)';
         // aside.style.transition = "1s";
         
-        aside.style.animation = "slideOut 200ms";
+        aside.style.animation = "slideOut 300ms";
         aside.style.display = 'none';
-
+        
 
         // window.setTimeout(() => {
         // }, 2000);
@@ -424,7 +426,7 @@ export const ScreenController = (() => {
         // aside.style.transition = "4s ease-in";
         aside.style.display = 'flex';
 
-        aside.style.animation = "slideIn 200ms";
+        aside.style.animation = "slideIn 300ms";
 
         // aside.style.display = 'flex';
     };
