@@ -1,5 +1,5 @@
 
-# Library Project
+# Todo List Project
 
 This is a Todo List project as part of The Odin Project course. 
 This app allows you to add projects and to-dos. Tasks consist of a title, description and due date. 
