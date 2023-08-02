@@ -1,3 +1,3 @@
-import { ScreenController } from "./gui";
+import ScreenController from "./GUI";
 
 ScreenController.startTodoList();

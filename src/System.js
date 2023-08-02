@@ -1,11 +1,10 @@
-import { StorageController } from "./Storage";
+// eslint-disable-next-line import/no-cycle
+import StorageController from "./Storage";
 
-export const System = (() => {
+const System = (() => {
     let projectsList = [];
 
-    const getProjectList = () => {
-        return projectsList;
-    };
+    const getProjectList = () => projectsList;
 
     const addProject = (Project) => {
         projectsList.push(Project);
@@ -13,13 +12,11 @@ export const System = (() => {
     };
 
     const removeProject = (project) => {
-        projectsList = projectsList.filter(_project => project !== _project);
+        projectsList = projectsList.filter((_project) => project !== _project);
         StorageController.updateStorage();
     };
 
-
-    return { addProject, getProjectList, removeProject}
+    return { addProject, getProjectList, removeProject };
 })();
 
-
-
+export default System;

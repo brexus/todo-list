@@ -1,7 +1,7 @@
-import { StorageController } from "./Storage";
-import Task from "./Task";
+// eslint-disable-next-line import/no-cycle
+import StorageController from "./Storage";
 
-export default class Project {
+class Project {
     constructor(title) {
         this.title = title;
         this.tasksList = [];
@@ -10,18 +10,17 @@ export default class Project {
     addTask(task) {
         this.tasksList.push(task);
 
-        this.tasksList.sort(function(a,b){
-            return new Date(a.dueDate) - new Date(b.dueDate);
-        });
+        this.tasksList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
 
         StorageController.updateStorage();
     }
 
     removeTask(_task) {
-        this.tasksList = this.tasksList.filter(task => task !== _task);
+        this.tasksList = this.tasksList.filter((task) => task !== _task);
         StorageController.updateStorage();
     }
 
     getTaskList = () => this.tasksList;
-
 }
+
+export default Project;
